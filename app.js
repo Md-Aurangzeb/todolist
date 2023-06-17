@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 // main().catch(err => console.log(err));
-const uri=process.env.uri;
+
+const uri="mongodb+srv://sleepyhead-admin:sleepyhead123@cluster0.zswynvi.mongodb.net";
 mongoose.connect(uri+"/todolistDB").catch(err => console.log(err));
 const itemSchema = new mongoose.Schema({
     name:{
