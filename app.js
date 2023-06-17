@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static("public"));
 
 // main().catch(err => console.log(err));
-const uri="mongodb+srv://"+process.env.USER_ID+":"+process.env.USER_PASSWORD+"@cluster0.zswynvi.mongodb.net";
+const uri=process.env.uri;
 mongoose.connect(uri+"/todolistDB");
 console.log("Database connected sucessfully.")
 const itemSchema = new mongoose.Schema({
