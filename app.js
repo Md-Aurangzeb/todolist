@@ -12,8 +12,7 @@ app.use(express.static("public"));
 
 // main().catch(err => console.log(err));
 const uri=process.env.uri;
-mongoose.connect(uri+"/todolistDB");
-console.log("Database connected sucessfully.")
+mongoose.connect(uri+"/todolistDB").catch(err => console.log(err));
 const itemSchema = new mongoose.Schema({
     name:{
         type:String,
@@ -72,7 +71,7 @@ app.get("/",function(req,res){
                 else
                     res.render("lists",{listTitle:"Today",newListItems:foundItems});
             };
-    func();
+    func().catch(err => console.log(err));
 
 })
 app.post("/",function(req,res){
@@ -91,7 +90,7 @@ app.post("/",function(req,res){
             foundList.items.push(item)
             foundList.save();
         }
-        func();
+        func().catch(err => console.log(err));
         res.redirect("/"+listName); 
     }
 });
@@ -103,7 +102,7 @@ app.post("/delete",function(req,res){
         const func=async ()=>{
             await Item.deleteOne({_id:checkedItemId});
         }
-        func();
+        func().catch(err => console.log(err));
         res.redirect("/"); 
     }
     else{
@@ -111,7 +110,7 @@ app.post("/delete",function(req,res){
 
             await List.findOneAndUpdate({name:listName},{$pull:{items:{_id:checkedItemId}}});
         }
-        func();
+        func().catch(err => console.log(err));
         res.redirect("/"+listName);
     }
 })
@@ -132,7 +131,7 @@ app.get("/:customListName",function(req,res){
             res.redirect("/"+customListName);
         }
     }
-    func();
+    func().catch(err => console.log(err));
 })
 app.get("/about",function(req,res){
     res.render("about");
