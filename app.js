@@ -13,7 +13,6 @@ app.use(express.static("public"));
 // main().catch(err => console.log(err));
 
 const uri="mongodb+srv://"+process.env.USER_ID+":"+process.env.USER_PASSWORD+"@cluster0.zswynvi.mongodb.net";
-console.log(uri);
 mongoose.connect(uri+"/todolistDB").catch(err => console.log(err));
 const itemSchema = new mongoose.Schema({
     name:{
